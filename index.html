@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIAGRAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gray-1:#b4b4b4;
+    --gray-2:#d9d9d9;
+    --white:#ffffff;
+    --dark:#555555;
+    --black:#000000;
+    --red:#c1121f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--black);
+    font-family:'Roboto Mono',monospace;
+    color:var(--white);
+    padding:60px 20px;
+  }
+  .wrap{max-width:720px;margin:0 auto;}
+
+  .tagline{
+    text-align:center;
+    font-size:14px;
+    color:var(--gray-1);
+    margin:26px 0 46px;
+  }
+
+  .section{margin-bottom:26px;}
+  .section-label{
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--gray-1);
+    text-transform:uppercase;
+    margin:0 0 8px 4px;
+  }
+
+  .card{
+    background:var(--gray-2);
+    border-radius:22px;
+    padding:32px 30px;
+    color:var(--black);
+  }
+  .card.alt{background:var(--gray-1);}
+  .card h2{
+    font-size:22px;
+    font-weight:700;
+    margin:0 0 16px;
+  }
+  .card p{
+    font-size:14px;
+    line-height:1.65;
+    color:var(--dark);
+    margin:0 0 14px;
+  }
+  .card p:last-child{margin-bottom:0;}
+  .card p.lead{
+    font-size:15.5px;
+    color:var(--black);
+  }
+  .study-link{
+    display:inline-block;
+    margin-top:20px;
+    padding-top:18px;
+    border-top:1px solid var(--gray-1);
+    font-size:11.5px;
+    color:var(--dark);
+    text-decoration:none;
+  }
+  .study-link:hover{color:var(--black);}
+  .red{color:var(--red);font-weight:700;}
+
+  /* hero obrázek */
+  .hero-img{display:flex;justify-content:center;padding:0 0 10px;}
+  .hero-img img{width:100%;max-width:640px;height:auto;display:block;}
+
+  /* diagram */
+  .diagram-label{
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--gray-1);
+    text-align:left;
+    margin:18px 0 8px 4px;
+  }
+  .diagram-card{background:var(--white);border-radius:22px;padding:24px;color:var(--black);margin-top:0;}
+  .diagram-card svg{width:100%;height:auto;display:block;}
+  .diagram-card .cap{text-align:center;font-size:11px;color:var(--dark);margin-top:8px;}
+
+  .atm-row{display:flex;gap:8px;}
+  .atm-box{flex:1;background:var(--gray-1);border-radius:10px;padding:10px 8px;text-align:center;}
+  .atm-box b{display:block;font-size:11px;}
+  .atm-box span{font-size:9px;color:var(--dark);}
+
+  .lifestyle-row{display:flex;gap:8px;}
+  .lifestyle-box{flex:1;background:var(--white);border:1px solid var(--dark);border-radius:10px;padding:10px 4px;text-align:center;font-size:11px;font-weight:700;}
+
+  .connector{text-align:center;padding:6px 0;}
+  .connector .arrow{font-size:14px;color:var(--dark);line-height:1;}
+  .connector .clabel{font-size:9px;color:var(--dark);font-style:italic;}
+
+  /* proces — 3 sloupce vedle sebe */
+  .proces-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .proces-col{background:var(--white);border-radius:16px;padding:20px 16px;color:var(--black);}
+  .proces-num{font-size:20px;font-weight:700;color:var(--gray-1);margin:0 0 8px;}
+  .proces-col b{display:block;font-size:13.5px;margin:0 0 6px;}
+  .proces-col span{font-size:11.5px;color:var(--dark);line-height:1.5;}
+
+  /* zdroje */
+  .sources{margin-top:16px;}
+  .quote-block{margin-top:16px;margin-bottom:44px;}
+  .byline{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    justify-content:center;
+    margin-bottom:24px;
+    flex-wrap:wrap;
+  }
+  .avatar{
+    width:56px;height:56px;border-radius:50%;
+    object-fit:cover;
+    border:1px solid var(--dark);
+  }
+  .byline-name{font-size:14px;font-weight:600;color:var(--white);}
+  .byline-title{font-size:11.5px;color:var(--gray-1);}
+  .cert-badge{
+    height:56px;width:auto;
+    border-radius:8px;
+    border:1px solid var(--dark);
+    object-fit:cover;
+  }
+  .sources-link{
+    display:block;
+    text-align:center;
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--gray-1);
+    text-decoration:none;
+    margin-top:20px;
+    letter-spacing:0.04em;
+  }
+  .sources-link:hover{color:var(--white);}
+  .hypothesis{
+    font-family:'Lora',serif;
+    font-style:italic;
+    font-size:19px;
+    line-height:1.8;
+    color:var(--white);
+    max-width:600px;
+    margin:0 auto;
+    text-align:center;
+  }
+
+  footer{
+    text-align:center;
+    font-size:11px;
+    color:var(--dark);
+    margin-top:50px;
+    letter-spacing:0.05em;
+  }
+
+  .signup-form{margin-top:20px;}
+  .signup-row{display:flex;gap:8px;}
+  .signup-row input[type="email"]{
+    flex:1;
+    font-family:'Roboto Mono',monospace;
+    font-size:13px;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid var(--dark);
+    background:var(--white);
+    color:var(--black);
+    min-width:0;
+  }
+  .signup-row button{
+    font-family:'Roboto Mono',monospace;
+    font-size:13px;
+    font-weight:600;
+    padding:12px 18px;
+    border-radius:10px;
+    border:none;
+    background:var(--black);
+    color:var(--white);
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .signup-row button:hover{background:#222;}
+
+  @media (max-width:600px){
+    .proces-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero-img"><img src="biagram-hero.png" alt="BIAGRAM — protokolový list"></div>
+  <div class="tagline">Personalizovaný systém optimalizace lidského potenciálu</div>
+
+  <!-- CO JE BIAGRAM -->
+  <div class="section">
+    <div class="section-label">Co je BIAGRAM</div>
+    <div class="card">
+      <p class="lead">BIAGRAM je personalizovaný protokol pro optimalizaci těla a mysli, postavený na individuálních datech a životní situaci klienta.</p>
+      <p>Cílem je udělat systematickou, na míru šitou optimalizaci dostupnou i mimo drahou a roztříštěnou soukromou péči.</p>
+    </div>
+  </div>
+
+  <!-- FILOSOFIE -->
+  <div class="section">
+    <div class="section-label">Filosofie</div>
+    <div class="card alt">
+      <h2>Funkční optimum</h2>
+      <p class="lead">BIAGRAM cílí na funkční optimum — úroveň těla a mysli, kterou člověk skutečně využije ve své práci, rodině a v prostředí, ve kterém žije.</p>
+      <p>Vychází z principu, který Miyamoto Musashi formuloval pro bojové umění — nedělat nic, co nemá využití — aplikovaného na oblast fyzické a mentální optimalizace.</p>
+      <p class="red">(Absolutnímu potenciálu bez ohledu na využití se věnuje samostatný projekt: HUMAN APEX, který zatím z bezpečnostních důvodů není zveřejněn ani plně definován)</p>
+    </div>
+  </div>
+
+  <!-- STRUKTURA MODELU -->
+  <div class="section">
+    <div class="section-label">Struktura modelu</div>
+    <div class="card">
+      <p class="lead">BIAGRAM vychází z Functional Medicine Matrix, oficiálně používaného rámce funkční medicíny, a staví na čtyřech provázaných vrstvách.</p>
+      <p><b>Vstupní anamnéza</b> zjišťuje osobní a zdravotní historii klienta — co jeho stavu předcházelo, co ho spustilo a co ho aktuálně udržuje. Sama nic nemění, ale určuje, který zásah bude u konkrétního člověka fungovat: dva lidé se stejně špatným spánkem mohou potřebovat úplně jiný přístup, pokud jeden prochází rozvodem a nepravidelnými směnami a druhý má celoživotní návyk na kofein pozdě večer.</p>
+      <p>Na ni navazuje jediná vrstva, kterou BIAGRAM přímo mění — <b>spánek, pohyb, výživa, stres a vztahy</b>.</p>
+      <p>Výsledek se měří v <b>sedmi fyziologických systémech</b>: asimilaci, obraně a opravě, energii, mitigaci a clearance, transportu, komunikaci a strukturální integritě.</p>
+      <p>Zdravé fungování těchto systémů má i druhý důsledek: tělo pak nestojí v cestě práci s myslí a uvědoměním.</p>
+
+      <a class="study-link" href="zdroje.html">Kompletní seznam studií →</a>
+    </div>
+
+    <!-- CELKOVÝ DIAGRAM -->
+    <div class="diagram-label">Functional Medicine Matrix</div>
+    <div class="diagram-card">
+      <div class="atm-row">
+        <div class="atm-box"><b>Predispozice</b><span>co předcházelo</span></div>
+        <div class="atm-box"><b>Spouštěče</b><span>co to spustilo</span></div>
+        <div class="atm-box"><b>Udržující faktory</b><span>co to teď udržuje</span></div>
+      </div>
+      <div class="connector"><div class="arrow">↓</div><div class="clabel">dává kontext / anamnézu</div></div>
+
+      <svg viewBox="0 0 700 680" xmlns="http://www.w3.org/2000/svg">
+        <line x1="350" y1="350" x2="350" y2="120" stroke="#b4b4b4" stroke-width="1"/>
+        <line x1="350" y1="350" x2="529.8" y2="206.6" stroke="#b4b4b4" stroke-width="1"/>
+        <line x1="350" y1="350" x2="574.2" y2="401.2" stroke="#b4b4b4" stroke-width="1"/>
+        <line x1="350" y1="350" x2="449.8" y2="557.2" stroke="#b4b4b4" stroke-width="1"/>
+        <line x1="350" y1="350" x2="250.2" y2="557.2" stroke="#b4b4b4" stroke-width="1"/>
+        <line x1="350" y1="350" x2="125.8" y2="401.2" stroke="#b4b4b4" stroke-width="1"/>
+        <line x1="350" y1="350" x2="170.2" y2="206.6" stroke="#b4b4b4" stroke-width="1"/>
+        <g font-family="'Roboto Mono',monospace">
+          <g><rect x="270" y="94" width="160" height="52" rx="10" fill="#d9d9d9" stroke="#555555"/><text x="350" y="114" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700">Asimilace</text><text x="350" y="132" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#555555">trávení, vstřebávání</text></g>
+          <g><rect x="449.8" y="180.6" width="160" height="52" rx="10" fill="#d9d9d9" stroke="#555555"/><text x="529.8" y="200.6" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700">Obrana a oprava</text><text x="529.8" y="218.6" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#555555">imunita</text></g>
+          <g><rect x="494.2" y="375.2" width="160" height="52" rx="10" fill="#d9d9d9" stroke="#555555"/><text x="574.2" y="395.2" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700">Energie</text><text x="574.2" y="413.2" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#555555">metabolismus</text></g>
+          <g><rect x="369.8" y="531.2" width="160" height="52" rx="10" fill="#d9d9d9" stroke="#555555"/><text x="449.8" y="551.2" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700">Mitigace a clearance</text><text x="449.8" y="569.2" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#555555">odbourávání, vylučování</text></g>
+          <g><rect x="170.2" y="531.2" width="160" height="52" rx="10" fill="#d9d9d9" stroke="#555555"/><text x="250.2" y="551.2" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700">Transport</text><text x="250.2" y="569.2" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#555555">srdce, cévy</text></g>
+          <g><rect x="45.8" y="375.2" width="160" height="52" rx="10" fill="#d9d9d9" stroke="#555555"/><text x="125.8" y="395.2" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700">Komunikace</text><text x="125.8" y="413.2" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#555555">hormony, nervy</text></g>
+          <g><rect x="90.2" y="180.6" width="160" height="52" rx="10" fill="#d9d9d9" stroke="#555555"/><text x="170.2" y="200.6" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700">Struktura</text><text x="170.2" y="218.6" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#555555">svaly, kosti, klouby</text></g>
+          <g><circle cx="350" cy="350" r="82" fill="#000000"/><text x="350" y="340" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="700" fill="#ffffff">M-E-S</text><text x="350" y="362" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="#b4b4b4">mysl · emoce · smysl</text></g>
+        </g>
+      </svg>
+
+      <div class="connector"><div class="arrow">↑</div><div class="clabel">ovlivňují</div></div>
+      <div class="lifestyle-row">
+        <div class="lifestyle-box">Spánek</div>
+        <div class="lifestyle-box">Pohyb</div>
+        <div class="lifestyle-box">Výživa</div>
+        <div class="lifestyle-box">Stres</div>
+        <div class="lifestyle-box">Vztahy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCES -->
+  <div class="section">
+    <div class="section-label">Proces</div>
+    <div class="proces-grid">
+      <div class="proces-col">
+        <div class="proces-num">1</div>
+        <b>Vstupní test</b>
+        <span>zdravotní data, životní styl, osobní historie</span>
+      </div>
+      <div class="proces-col">
+        <div class="proces-num">2</div>
+        <b>BIAGRAM</b>
+        <span>konkrétní kroky v 5 faktorech</span>
+      </div>
+      <div class="proces-col">
+        <div class="proces-num">3</div>
+        <b>Přeměření</b>
+        <span>ověření posunu, úprava plánu</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAV -->
+  <div class="section">
+    <div class="section-label">Stav</div>
+    <div class="card alt">
+      <p>Projekt je ve vývoji.</p>
+    </div>
+  </div>
+
+  <!-- CITACE -->
+  <div class="quote-block">
+    <div class="byline">
+      <img class="avatar" src="josef-avatar.png" alt="Josef Foltýn Jr.">
+      <div>
+        <div class="byline-name">Josef Foltýn Jr.</div>
+        <div class="byline-title">Founder &amp; CEO, FoltFusion</div>
+      </div>
+      <img class="cert-badge" src="certificate-thumb.jpg" alt="Biohacking Certification Course">
+    </div>
+    <p class="hypothesis">„Dosažení určité úrovně v těchto sedmi systémech mi odemyká potenciál pracovat s vlastní myslí — tělo přestává bránit čistotě myšlení a otevírá prostor sebeuvědomění a sebereflexi, které vedou k hlubšímu poznání vlastní podstaty. To je pro mě absolutní vrchol, ke kterému by měl směřovat každý člověk. Taková proměna totiž neposouvá jen kvalitu prožívání na zcela jinou úroveň, ale přispívá i k obecnému dobru — za většinu problémů světa totiž podle mě může lidské ego — nenasytná potřeba mysli ovládat a definovat se skrze vnější svět, čímž člověka vzdaluje od jeho pravé podstaty.“</p>
+  </div>
+
+  <!-- PŘEDBĚŽNÝ PŘÍSTUP -->
+  <div class="section">
+    <div class="section-label">Předběžný přístup</div>
+    <div class="card alt">
+      <p class="lead">Nechte nám e-mail a jako první se dozvíte, až bude BIAGRAM připravený.</p>
+      <form class="signup-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="1baa733c-b265-4d88-abbc-15f370bf9a83">
+        <input type="hidden" name="subject" value="Nový zájemce o BIAGRAM">
+        <div class="signup-row">
+          <input type="email" name="email" placeholder="vas@email.cz" required>
+          <button type="submit">Odeslat</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PATIČKA -->
+  <footer>&copy; 2026 FoltFusion · BIAGRAM&trade; · Všechna práva vyhrazena</footer>
+
+</div>
+</body>
+</html>
